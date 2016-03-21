@@ -1,0 +1,31 @@
+<div class="contact-list">
+	<div class="filter-list contact-list">
+		<a (click)="applyFilter(0)" [ngClass]="{active: selectedFilter === 0}">All</a>
+		<a (click)="applyFilter(1)" [ngClass]="{active: selectedFilter === 1}">Not-checked</a>
+		<a (click)="applyFilter(2)" [ngClass]="{active: selectedFilter === 2}">Checked</a>
+	</div>
+
+	<table class="table table-bordered">
+		<tbody>
+			<tr *ngFor="#contact of filteredContacts">
+				<td class="center-checkbox">
+					<input type="checkbox" value="1" id="{{contact.id}}" [checked]="contact.checked"/>
+				</td>
+
+				<td [ngClass]="{active: selectedId === contact.id}">
+					<!-- <a route-href="route: contacts; params.bind: {id: contact.id}"> -->
+					<a href="#">
+						<label>{{contact.username}}</label><br/>
+						<small>{{contact.email}}</small>
+					</a>
+				</td>
+				<td class="center-checkbox">
+					<a class="remove-button" (click)="remove(contact)"><span class="fa fa-remove"></span></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<span>{{filteredContacts == null ? 0 : filteredContacts.length}} contacts</span>
+</div>
+<br/>

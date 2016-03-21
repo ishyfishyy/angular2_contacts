@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "module": "system",
     "moduleResolution": "classic",
     "sourceMap": true,
@@ -21,7 +21,12 @@
     "rewriteTsconfig": true
   },
   "files": [
-    "src/app.component.ts",
-    "src/main.ts"
+    "src/app.ts",
+    "src/contact-list.ts",
+    "src/main.ts",
+    "src/nav-bar.ts",
+    "src/services/constants.ts",
+    "src/services/contact.ts",
+    "src/services/store.ts"
   ]
 }
