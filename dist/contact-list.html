@@ -13,8 +13,7 @@
 				</td>
 
 				<td [ngClass]="{active: selectedId === contact.id}">
-					<!-- <a route-href="route: contacts; params.bind: {id: contact.id}"> -->
-					<a href="#">
+					<a [routerLink]="['Contacts', {id: contact.id}]">
 						<label>{{contact.username}}</label><br/>
 						<small>{{contact.email}}</small>
 					</a>

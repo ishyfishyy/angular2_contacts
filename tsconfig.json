@@ -22,9 +22,11 @@
   },
   "files": [
     "src/app.ts",
+    "src/contact-detail.ts",
     "src/contact-list.ts",
     "src/main.ts",
     "src/nav-bar.ts",
+    "src/no-selection.ts",
     "src/services/constants.ts",
     "src/services/contact.ts",
     "src/services/store.ts"

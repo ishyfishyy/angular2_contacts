@@ -11,7 +11,7 @@ export class ContactStore {
 	contacts: Array<Contact>;
 
 	constructor(_http: Http) { // THIS: INJECT
-		localStorage.clear();
+		//localStorage.clear();
 		this.contacts = JSON.parse(localStorage.getItem(Constants.STORAGE_CONTACTS));
 
 		if(!this.contacts) {
@@ -110,6 +110,22 @@ export class ContactStore {
 		console.log("update storage");
 	}
 }
+
+export class ContactUpdated {
+ 	contact: Contact;
+
+ 	constructor(contact: Contact) {
+ 		this.contact = contact;
+ 	}
+ }
+
+ export class ContactSelected {
+ 	contact: Contact;
+
+ 	constructor(contact: Contact) {
+ 		this.contact = contact;
+ 	}
+ }
 
 //
 // @inject(HttpClient, ObserverLocator)

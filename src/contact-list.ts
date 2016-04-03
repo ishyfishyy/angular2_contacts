@@ -1,30 +1,33 @@
 import {ContactStore} from "./services/store";
 import {Contact} from "./services/contact";
 
-import {Component, Injectable} from 'angular2/core';
+import {Component, Injectable, EventEmitter} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
+
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 
 @Component({
     selector: 'contact-list',
     templateUrl: 'dist/contact-list.html',
+	directives: [RouterLink]
 })
 
 @Injectable()
 export class ContactList {
-	contactStore: ContactStore;
 	selectedId: number = 0;
 
 	selectedFilter: number = 0;
 	filteredContacts: Array<Contact>;
 
-	constructor(_contactStore: ContactStore) {
-		this.contactStore = _contactStore;
+	constructor(private _contactStore: ContactStore, private _eventEmitter: EventEmitter) {
 		this.applyFilter(0);
 
-		console.log("ContactList");
+
 	}
 
 	private get contacts(): Array<Contact> {
-		return this.contactStore.contacts;
+		return this._contactStore.contacts;
 	}
 
 	applyFilter(type: number): void {
@@ -51,11 +54,11 @@ export class ContactList {
 	}
 
 	remove(contact: Contact): void {
-		this.contactStore.remove(contact);
+		this._contactStore.remove(contact);
 	}
 
 	addNew(): void {
-		this.contactStore.addNew();
+		this._contactStore.addNew();
 		this.applyFilter(this.selectedFilter);
 	}
 }
