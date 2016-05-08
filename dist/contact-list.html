@@ -9,12 +9,12 @@
 		<tbody>
 			<tr *ngFor="#contact of filteredContacts">
 				<td class="center-checkbox">
-					<input type="checkbox" value="1" id="{{contact.id}}" [checked]="contact.checked"/>
+					<input type="checkbox" value="1" id="{{contact.id}}" [(ngModel)]="contact.checked" (change)="checked()"/>
 				</td>
 
 				<td [ngClass]="{active: selectedId === contact.id}">
 					<a [routerLink]="['Contacts', {id: contact.id}]">
-						<label>{{contact.username}}</label><br/>
+						<label>{{contact.username | toUpperCase}}</label><br/>
 						<small>{{contact.email}}</small>
 					</a>
 				</td>
@@ -27,4 +27,5 @@
 
 	<span>{{filteredContacts == null ? 0 : filteredContacts.length}} contacts</span>
 </div>
+<button class="btn btn-primary pull-right" (click)="addNew()"><span class="fa fa-plus"></span> Add</button>
 <br/>

@@ -18,18 +18,21 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            let NavBar = class NavBar {
-            };
-            NavBar = __decorate([
-                core_1.Component({
-                    selector: 'nav-bar',
-                    templateUrl: 'dist/nav-bar.html',
-                }), 
-                __metadata('design:paramtypes', [])
-            ], NavBar);
+            NavBar = (function () {
+                function NavBar() {
+                }
+                NavBar = __decorate([
+                    core_1.Component({
+                        selector: 'nav-bar',
+                        templateUrl: 'dist/nav-bar.html',
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], NavBar);
+                return NavBar;
+            }());
             exports_1("NavBar", NavBar);
         }
     }
 });
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5hdi1iYXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUFPQTtZQUFxQixDQUFDO1lBTHRCO2dCQUFDLGdCQUFTLENBQUM7b0JBQ1AsUUFBUSxFQUFFLFNBQVM7b0JBQ25CLFdBQVcsRUFBRSxtQkFBbUI7aUJBQ25DLENBQUM7O3NCQUFBO1lBRUYsMkJBQXNCLENBQUEiLCJmaWxlIjoibmF2LWJhci5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7Q29tcG9uZW50fSBmcm9tICdhbmd1bGFyMi9jb3JlJztcclxuXHJcbkBDb21wb25lbnQoe1xyXG4gICAgc2VsZWN0b3I6ICduYXYtYmFyJyxcclxuICAgIHRlbXBsYXRlVXJsOiAnZGlzdC9uYXYtYmFyLmh0bWwnLFxyXG59KVxyXG5cclxuZXhwb3J0IGNsYXNzIE5hdkJhciB7fVxyXG4iXSwic291cmNlUm9vdCI6Ii9zb3VyY2UvIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm5hdi1iYXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7WUFPQTtnQkFBQTtnQkFBcUIsQ0FBQztnQkFMdEI7b0JBQUMsZ0JBQVMsQ0FBQzt3QkFDUCxRQUFRLEVBQUUsU0FBUzt3QkFDbkIsV0FBVyxFQUFFLG1CQUFtQjtxQkFDbkMsQ0FBQzs7MEJBQUE7Z0JBRW1CLGFBQUM7WUFBRCxDQUFyQixBQUFzQixJQUFBO1lBQXRCLDJCQUFzQixDQUFBIiwiZmlsZSI6Im5hdi1iYXIuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQge0NvbXBvbmVudH0gZnJvbSAnYW5ndWxhcjIvY29yZSc7XHJcblxyXG5AQ29tcG9uZW50KHtcclxuICAgIHNlbGVjdG9yOiAnbmF2LWJhcicsXHJcbiAgICB0ZW1wbGF0ZVVybDogJ2Rpc3QvbmF2LWJhci5odG1sJyxcclxufSlcclxuXHJcbmV4cG9ydCBjbGFzcyBOYXZCYXIge31cclxuIl0sInNvdXJjZVJvb3QiOiIvc291cmNlLyJ9

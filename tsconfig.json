@@ -1,7 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "system",
     "moduleResolution": "classic",
     "sourceMap": true,
@@ -29,6 +29,7 @@
     "src/no-selection.ts",
     "src/services/constants.ts",
     "src/services/contact.ts",
-    "src/services/store.ts"
+    "src/services/store.ts",
+    "src/converters/to-upper-case-converter.ts"
   ]
 }

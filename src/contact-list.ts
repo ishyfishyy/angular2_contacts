@@ -1,5 +1,6 @@
 import {ContactStore} from "./services/store";
 import {Contact} from "./services/contact";
+import {ToUpperCasePipe} from "./converters/to-upper-case-converter"
 
 import {Component, Injectable, EventEmitter} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
@@ -10,7 +11,8 @@ import {Observer} from 'rxjs/Observer';
 @Component({
     selector: 'contact-list',
     templateUrl: 'dist/contact-list.html',
-	directives: [RouterLink]
+	directives: [RouterLink],
+	pipes: [ToUpperCasePipe]
 })
 
 @Injectable()
@@ -20,10 +22,15 @@ export class ContactList {
 	selectedFilter: number = 0;
 	filteredContacts: Array<Contact>;
 
-	constructor(private _contactStore: ContactStore, private _eventEmitter: EventEmitter) {
+	constructor(private _contactStore: ContactStore) {
 		this.applyFilter(0);
 
 
+	}
+
+	checked(): void {
+		console.log("checked");
+		this._contactStore.updateStorage();
 	}
 
 	private get contacts(): Array<Contact> {
@@ -45,6 +52,7 @@ export class ContactList {
 				this.filteredContacts = this.contacts.filter(x => x.checked == true);
 				break;
 		}
+		console.log("HEY!");
 	}
 
 	select(contact: Contact): void {
