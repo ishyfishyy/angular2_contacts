@@ -37,7 +37,6 @@ gulp.task('build-system', function () {
 		.pipe($.sourcemaps.init({loadMaps: true}))
 		.pipe($.typescript(typescriptCompiler))
 		.pipe($.sourcemaps.write({includeContent: true}))
-		//.pipe($.uglify())
 		.pipe(gulp.dest(paths.output));
 });
 
@@ -51,7 +50,6 @@ gulp.task('build-scss', function () {
 		.pipe($.plumber())
 		.pipe($.sourcemaps.init())
 		.pipe($.sass()).on('error', $.sass.logError)
-		//.pipe($.minify())
 		.pipe(gulp.dest(paths.mainCss));
 });
 

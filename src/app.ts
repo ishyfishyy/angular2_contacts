@@ -14,6 +14,7 @@ import {NoSelection} from './no-selection';
 
 @RouteConfig([
     { path: '/', component: NoSelection, name: 'No-selection' },
+    { path: '/contacts', component: NoSelection, name: 'No-selection' },
     { path: '/contacts/:id', component: ContactDetail, name: 'Contacts' }
 ])
 

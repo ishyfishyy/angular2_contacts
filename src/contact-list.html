@@ -1,4 +1,6 @@
 <div class="contact-list">
+	<button class="btn btn-default" (click)="runRenderingTest()">Run Rendering Benchmark</button>
+
 	<div class="filter-list contact-list">
 		<a (click)="applyFilter(0)" [ngClass]="{active: selectedFilter === 0}">All</a>
 		<a (click)="applyFilter(1)" [ngClass]="{active: selectedFilter === 1}">Not-checked</a>

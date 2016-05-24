@@ -1,32 +1,22 @@
 import {Contact} from "./contact";
 import {Constants} from "./constants";
-
 import {Injectable} from 'angular2/core';
 import {Http} from 'angular2/http';
-
-import 'rxjs/add/operator/map'
-
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
-
 
 @Injectable()
 export class ContactStore {
 	contacts: Array<Contact>;
 
-	constructor(_http: Http) { // THIS: INJECT
-		//localStorage.clear();
+	constructor(_http: Http) {
 		this.contacts = JSON.parse(localStorage.getItem(Constants.STORAGE_CONTACTS));
 
 		if(!this.contacts) {
-			_http.get('https://api.github.com/users') // THIS: HTTP
-				//.map(response => response.json()) // NOT WORKING
+			_http.get('https://api.github.com/users')
 				.subscribe(
 					users => {
 						users = users.json();
 
-						this.contacts = users.map((user: { id: number, login: string, avatar_url: string, type: string }) => { // THIS
-							console.log("xxx");
+						this.contacts = users.map((user: { id: number, login: string, avatar_url: string, type: string }) => {
 							let contact = new Contact();
 							contact.id = user.id;
 							contact.username = user.login;
@@ -44,19 +34,8 @@ export class ContactStore {
 					},
 					() => {
 						this.updateStorage();
-						this.applyObservers();
-
-						console.log(this.contacts);
-					}
-				)
+					})
 		}
-		console.log(this.contacts);
-	}
-
-	applyObservers(): void {
-		this.contacts.forEach((e, i) => {
-			
-		});
 	}
 
 	addNew(): void {
@@ -64,8 +43,6 @@ export class ContactStore {
 		contact.id = this.getId();
 		contact.username = "username";
 		contact.email = "e-mail";
-
-		//this.observerLocator.getObserver(contact, 'checked').subscribe(() => this.updateStorage());
 
 		this.contacts.push(contact);
 		this.updateStorage();
@@ -100,13 +77,10 @@ export class ContactStore {
 	}
 
 	find(id: number) {
-		console.log("find request?");
 		return new Promise(executor => {
 			let found: Contact = this.contacts.filter(x => x.id == id)[0];
 			executor(found);
 		});
-		//return this.contacts.filter(x => x.id == id)[0];
-
 	}
 
 	private getId(): number {
@@ -115,6 +89,5 @@ export class ContactStore {
 
 	updateStorage(): void {
 		localStorage.setItem(Constants.STORAGE_CONTACTS, JSON.stringify(this.contacts));
-		console.log("update storage");
 	}
 }

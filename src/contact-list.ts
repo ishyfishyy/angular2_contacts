@@ -2,11 +2,8 @@ import {ContactStore} from "./services/store";
 import {Contact} from "./services/contact";
 import {ToUpperCasePipe} from "./converters/to-upper-case-converter"
 
-import {Component, Injectable, EventEmitter} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
-
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
 
 @Component({
     selector: 'contact-list',
@@ -14,8 +11,6 @@ import {Observer} from 'rxjs/Observer';
 	directives: [RouterLink],
 	pipes: [ToUpperCasePipe]
 })
-
-@Injectable()
 export class ContactList {
 	selectedId: number = 0;
 
@@ -24,12 +19,9 @@ export class ContactList {
 
 	constructor(private _contactStore: ContactStore) {
 		this.applyFilter(0);
-
-
 	}
 
 	checked(): void {
-		console.log("checked");
 		this._contactStore.updateStorage();
 	}
 
@@ -52,12 +44,9 @@ export class ContactList {
 				this.filteredContacts = this.contacts.filter(x => x.checked == true);
 				break;
 		}
-		console.log("HEY!");
 	}
 
 	select(contact: Contact): void {
-		console.log("selected contact " + contact.username + " " + contact.id);
-
 		this.selectedId = contact.id;
 	}
 
@@ -69,62 +58,63 @@ export class ContactList {
 		this._contactStore.addNew();
 		this.applyFilter(this.selectedFilter);
 	}
+
+	// BENCHMARK
+	TOTAL_COUNT: number = 1000;
+	REPEAT_TIMES: number = 1;
+	TIME_BETWEEN_TESTS: number = 1000;
+
+	startTime: Date;
+	average: Array<number>;
+
+	private printDuration(final: boolean): void {
+		window.setTimeout((end: boolean) => {
+			var timing = +(new Date() - this.startTime);
+			this.average.push(timing);
+			//console.log("Rendering " + this.TOTAL_COUNT + " contacts took " + timing + " ms.");
+			console.log(timing);
+
+			if(end) {
+				var sum = this.average.reduce((a, b) => a + b, 0);
+
+				console.log("## Ending test ##");
+				console.log();
+				console.log("=> Average execution time: " + +(sum / this.REPEAT_TIMES) + " ms.");
+			}
+		}, 0, final);
+	}
+
+	private startTiming(): void {
+		this.startTime = new Date();
+	}
+
+	public runRenderingTest(): void {
+		this.average = [];
+
+		console.log("## Starting test ##");
+
+		for(var x = 0; x < this.REPEAT_TIMES; ++x) {
+			setTimeout((idx: number) => {
+				this.startTiming();
+
+				var data: Array<Contact> = [];
+
+				this.startTime = new Date();
+
+				for (var i = 0; i < this.TOTAL_COUNT; ++i) {
+					var contact: Contact = new Contact();
+					contact.id = i;
+					contact.username = "USERNAME " + Math.abs(Math.random());
+					contact.email = "USERNAME@EMAIL.COM";
+					contact.avatarUrl = "http://cdn2.hubspot.net/hub/245562/file-302950328-png/v3/ninja.png";
+					contact.description = "DESCRIPTION!!!";
+
+					data.push(contact);
+				}
+				this.filteredContacts = data;
+
+				this.printDuration(idx === (this.REPEAT_TIMES - 1));
+			}, 1000 + ((x + 1) * this.TIME_BETWEEN_TESTS), x);
+		}
+	}
 }
-//
-// @inject(ContactStore, EventAggregator)
-// export class ContactList {
-// 	contactStore: ContactStore;
-// 	selectedId: number = 0;
-//
-// 	selectedFilter: number = 0;
-// 	filteredContacts: Array<Contact>;
-//
-// 	constructor(contactStore: ContactStore, eventAggregator: EventAggregator) {
-// 		this.contactStore = contactStore;
-// 		this.applyFilter(0);
-//
-// 		eventAggregator.subscribe(ContactSelected, x => this.select(x.contact))
-// 		eventAggregator.subscribe(ContactUpdated, x => {
-// 			let id = x.contact.id;
-// 			let found = this.contacts.filter(c => c.id == id)[0];
-//
-// 			Object.assign(found, x.contact);
-// 		});
-// 	}
-//
-// 	private get contacts(): Array<Contact> {
-// 		return this.contactStore.contacts;
-// 	}
-//
-// 	applyFilter(type: number): void {
-// 		switch(type) {
-// 			case 0:
-// 				this.selectedFilter = 0;
-// 				this.filteredContacts = this.contacts;
-// 				break;
-// 			case 1:
-// 				this.selectedFilter = 1;
-// 				this.filteredContacts = this.contacts.filter(x => x.checked == false);
-// 				break;
-// 			case 2:
-// 				this.selectedFilter = 2;
-// 				this.filteredContacts = this.contacts.filter(x => x.checked == true);
-// 				break;
-// 		}
-// 	}
-//
-// 	select(contact: Contact): void {
-// 		console.log("selected contact " + contact.username + " " + contact.id);
-//
-// 		this.selectedId = contact.id;
-// 	}
-//
-// 	remove(contact: Contact): void {
-// 		this.contactStore.remove(contact);
-// 	}
-//
-// 	addNew(): void {
-// 		this.contactStore.addNew();
-// 		this.applyFilter(this.selectedFilter);
-// 	}
-// }

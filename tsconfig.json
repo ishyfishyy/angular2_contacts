@@ -30,6 +30,6 @@
     "src/services/constants.ts",
     "src/services/contact.ts",
     "src/services/store.ts",
-    "src/converters/to-upper-case-converter.ts"
+    "src/converter/to-upper-case-converter.ts"
   ]
 }

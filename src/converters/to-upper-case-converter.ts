@@ -1,5 +1,5 @@
-import {PipeTransform} from "../../jspm_packages/npm/angular2@2.0.0-beta.11/ts/src/core/change_detection/pipe_transform";
-import {Pipe} from "../../jspm_packages/npm/angular2@2.0.0-beta.11/src/core/metadata";
+import {PipeTransform} from "angular2/core";
+import {Pipe} from "angular2/core";
 
 @Pipe({name: 'toUpperCase'})
 export class ToUpperCasePipe implements PipeTransform {
